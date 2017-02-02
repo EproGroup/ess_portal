@@ -1,0 +1,898 @@
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<link rel="stylesheet" href="/ol3/css/ol.css" type="text/css" />
+		<link rel="stylesheet" href="/ol3/css/layout.css" type="text/css" />
+		<link rel="stylesheet" href="/ol3/css/bootstrap/css/bootstrap-responsive.min.css" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/ol3/css/sweetalert/sweetalert2.min.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="../js/lib/jquery-ui/jquery-ui.min.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(document).ajaxStart(function () {
+					$("#loaderGif").css("display", "block");
+				});
+				$(document).ajaxComplete(function () {
+					$("#loaderGif").css("display", "none");
+				});
+				$('#visible70').click(function(){$('#visible71').click()})
+			});
+		</script>
+
+		
+
+	<style type="text/css">
+	#layertree li fieldset > span{
+	cursor:pointer;
+	padding-left: 10px;
+	}
+	#over 	{
+			position: relative;
+			top: -74vh;
+			z-index: 99;
+			
+			}
+				</style>
+	
+		<!-- Piwik -->
+		<script type="text/javascript">
+		var _paq = _paq || [];
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//bolegweb.geof.unizg.hr/piwik/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 9]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		})();
+		</script>
+		<noscript><p><img src="//bolegweb.geof.unizg.hr/piwik/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
+		<!-- End Piwik Code -->
+
+<script type="text/javascript">
+		$(document).ready(function () {
+		//$("input[type=range]").slice( 3 ).val(0.3);
+		$( "#removeAll" ).first().click(function() {
+		$( "#visible1" ).click();
+		$( "#visible2" ).click();
+		$( "#visible3" ).click();
+		$( "#visible4" ).click();
+		$( "#visible5" ).click();
+		$( "#visible6" ).click();
+		});
+		image1 = '<a href="http://147.251.252.167:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage" target="_new"><img src="http://a.fsdn.com/allura/p/geoserver/icon" width="22px" title="GeoServer Web GIS Server"></img></a>';
+		image2 = '<a href="http://147.251.252.167:8080/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities" target="_new"><img src="http://www.cali.gov.co/info/principal/media/img5601" height="22px" title="OGC WMS GetCapabilities"></img></a>';
+		image3 = '<a href="https://themes.jrc.ec.europa.eu/groups/profile/1712/land-use" target="_new"><img src="https://themes.jrc.ec.europa.eu/groupicon/1712/large/1417866700.jpg" height="22px" title="Land Use : INSPIRE Thematic Clusters"></img></a>';
+		
+		$('button[title="Attributions"]').after( image1+image2+image3 );
+		});
+	</script>
+	
+<!-- 	<script type="text/javascript">
+		$(document).ready(function () {
+			$( "#popup" ).onclick(function() {
+				$( "#popup" ).draggable();
+			});
+		});
+	</script> -->
+	<!-- 	<script>
+	$(document).ready(function () {
+		$( "#info" ).children().click(function() {
+			$('#leg1').show(); 
+			});
+	});
+	</script> -->
+	<title>SK Pilot Ecosystem Services Evaluation</title>
+</head>
+<body>
+	<div class="navbar" style="background-color: #009EE0;">
+	<div style="background-color: #333; font-size: 17px; color: #fff; "><div class="container">SDI 4 APPS - UPTAKE OF OPEN GEOGRAPHIC INFORMATION THROUGH INNOVATIVE SERVICES BASED ON LINKED DATA</div></div>
+		<div class="navbar-inner" >
+			<div style="float: left; padding-left: 5px;">
+				<a href="http://sdi4apps.eu/" target="_blank" ><img style="padding-top: 20px; padding-left: 20px;"
+							src="../img/sdi4apps_logo_web.png"/></a>
+			</div>
+			<div style="float: left; padding-left: 50px; padding-top: 12px;">
+				<h2  class="navbar-text" style="color: white;">SK Pilot Ecosystem Services Evaluation</h2>
+			</div>
+			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="." style="color: white">VERSION 1</a></div>
+			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="../map-dev.html" style="color: white">SLOVAK</a></div>
+					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="map-dev.html" style="color: white">MAP</a></div>
+					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="index-dev.html" style="color: white">HOME</a></div>
+		</div>
+	</div>
+	<div id="wrapper" class="container-fluid">
+		<div class="row-fluid">
+			<div class="span6">
+
+				<div id="map" class="map" style= "height:75vh";></div>
+				<div id="over" class="col-xs-6 col-xs-offset-3">
+					<!-- Search Bar -->
+					<form id="placename-search" >
+						<div class="form-group" >
+							<input type="text" class="form-control" id="placename-input" placeholder="SEARCH LOCALITY BY NAME (e.g. slovak paradise )">
+						</div>
+					</form>
+				</div>
+	
+				<div id="belowmapbuttons" style="bottom: 40px;position: relative;display: inline-block;">
+				<button type="button" class="btn btn-info" id="removeAll">ON/OFF ALL THEMATIC LAYERS</button>
+				<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalTypy">TYPES OF THEMATIC LAYERS</button>
+									<!-- Modal -->
+										<div class="modal fade" id="myModalTypy" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Layers types</h4>
+												</div>
+												<div class="modal-body">
+												<p><b>Basic layers</b> express volume of the benefits provided by a given ecosystem service in physical units as they were evaluated. E.g. m3 of wood (paper pulp) or m3 of carbon in the layer of carbon sequestration in different types of landscape.</p>
+												<p><b>Normalized layers</b> are created based on the basic layers of evaluated ESS where the values ​in the individual layers have been transformed (normalized) to the range between 0-1. Such normalizing by very simple method allows qualitatively compare and merge different layers.</p>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+				</div>
+	  
+				<div id="popup" class="ol-popup">
+					<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+					<div id="popup-content">
+						<div id="md-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">VALUES OF INDICATORS FOR SELECTED LOCALITY</h4>
+							</div>
+							<div id="md-info-body" class="modal-body" >
+							</div>
+							<div class="modal-footer">
+								<button id="btn-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+	
+			<div id="layertree" class="span6">
+					<ul class="chk-container">
+						<!-- BASE LAYERS -->
+						<li id="list0">
+							<fieldset id="layer0">
+								<label class="checkbox" for="visible0" id="label0">
+									<input id="visible0" class="visible" type="checkbox" />
+									</label>
+									<span style="display: inline-block;">UNDERLYING LAYERS</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;" />
+							</fieldset>
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer00">
+										<label class="checkbox" for="visible00">
+											<input id="visible00" class="visible"
+													type="checkbox"/></label>
+													<span>Open Street Map</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer01">
+										<label class="checkbox" for="visible01">
+											<input id="visible01" class="visible"
+													type="checkbox" /></label>
+													<span>NUTS 3 - Regions</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;" />
+									</fieldset>
+								</li>
+								
+								<li>
+									<fieldset id="layer02">
+										<label class="checkbox" for="visible02">
+											<input id="visible02" class="visible"
+													type="checkbox" /></label>
+													<span>LAU 1 - Districts</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;" />
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer03">
+										<label class="checkbox" for="visible03">
+											<input id="visible03" class="visible"
+													type="checkbox" /></label>
+													<span>LAU 2 - Municipalities</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;" />
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- I -->
+						<li>
+							<fieldset id="layer1">
+								<label class="checkbox" for="visible1">
+									<input id="visible1" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" style="float:right">i</button>
+											<span><b>I. WOOD (PAPER PULP) PRODUCTION</b></span>
+											
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>						
+						
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer10">
+										<label class="checkbox" for="visible10">
+											<input id="visible10" class="visible"
+													type="checkbox" /></label>
+													<span>The volume of wood (paper pulp) produced in tonnes by the area of ​1 ha per year</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer11">
+										<label class="checkbox" for="visible11">
+											<input id="visible11" class="visible"
+													type="checkbox" /></label>
+													<span>The volume of wood produced by the area of ​1 ha per year - normalized.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal1" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">WOOD (PAPER PULP) PRODUCTION</h4>
+												</div>
+												<div class="modal-body">
+												<p>Layer was created on the top of the Corine Landcover 2006, where forest categories were evaluated based on Corine classification. (Coniferous forest, deciduous forest, mixed forest). Individual cells of the layers were assigned with average value of forest growth in this type of forest per year.</p>
+												<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/aacbbe25-b72c-4f5f-9462-e60088d1f5e4" target="_blank">metadata</a>
+												</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+										</div>
+						</li>
+						<!-- II -->
+						<li>
+							<fieldset id="layer2">
+								<label class="checkbox" for="visible2">
+									<input id="visible2" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2" style="float:right">i</button>
+											<span><b>II. NUMBER OF LIVESTOCK PER HECTARE OF PASTURE</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+						
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer20">
+										<label class="checkbox" for="visible20">
+											<input id="visible20" class="visible"
+													type="checkbox" /></label>
+													<span>The number of cattle per one hectare of pastures</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer21">
+										<label class="checkbox" for="visible21">
+											<input id="visible21" class="visible"
+													type="checkbox" /></label>
+										<span>The number of cattle per one hectare pasture - normalized</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							
+							<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal2" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">NUMBER OF LIVESTOCK PER HECTARE OF PASTURE</h4>
+												</div>
+												<div class="modal-body">
+												<p>Layer represents the number of livestock grazing on one hectare in a given district. Layer was formed as a combination of statistical data number of animals in the various districts of the Slovakia and suitable pastures for grazing livestock.</p>
+												<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/0179d7ac-f044-4baf-82a0-4179b740b2e2" target="_blank">metadata</a>
+												</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+						</li>
+						<!-- III -->
+						<li>
+							<fieldset id="layer3">
+								<label class="checkbox" for="visible3">
+									<input id="visible3" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal3" style="float:right">i</button>
+											<span><b>III. CARBON SEQUESTRATION BASED ON LAND TYPES</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>						
+							
+								<ul style="display:none;">
+								<li>
+									<fieldset id="layer30">
+										<label class="checkbox" for="visible30">
+											<input id="visible30" class="visible"
+													type="checkbox" /></label>
+													<span>The volume of CO2 sequestration in the country in tons per year</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer31">
+										<label class="checkbox" for="visible31">
+											<input id="visible31" class="visible"
+													type="checkbox" /></label>
+													<span>The volume of CO2 sequestrations in the country in tons per year - normalized</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							
+							<div class="container">
+											<!-- Modal -->
+											<div class="modal fade" id="myModal3" role="dialog">
+												<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">CARBON SEQUESTRATION BASED ON LAND TYPES</h4>
+													</div>
+													<div class="modal-body">
+													<p>Layer defines the volume of CO2 sequestration in the country by tons per year. Layer was created by assessing landscapes types according the Corine Landcover and assignment of values ​of CO2 sequestration for particular land type.</p>
+													<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/6119d24a-1faf-42fd-8cdf-eb5fc3e3ba5e" target="_blank">metadata</a>
+													</div>
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+												</div>
+											</div>
+										</div>
+						</li>
+						<!-- IV -->
+						<li>
+							<fieldset id="layer4">
+								<label class="checkbox" for="visible4">
+									<input id="visible4" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal4" style="float:right">i</button>
+											<span><b>IV. LANDSCAPE QUALITY FROM TOURISM PERSPECTIVE</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+						
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer40">
+										<label class="checkbox" for="visible40">
+											<input id="visible40" class="visible"
+													type="checkbox" /></label>
+													<span>Area potencial for tourism (Min: 1; Max: 10)</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer41">
+										<label class="checkbox" for="visible41">
+											<input id="visible41" class="visible"
+													type="checkbox" /></label>
+													<span>Area potencial for tourism - normalized</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							
+							<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal4" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">KVALITA ÚZEMIA Z HĽADISKA CESTOVNÉHO RUCHU</h4>
+												</div>
+												<div class="modal-body">
+												<p>Layer expresses potential of the area for tourism. Layer was evaluated as summary of areas and points potentially interesting for tourism. As inputs connected layers of protected areas evaluated according to their relevance were used. Taking into the consideration legal access restrictions (eg. Restricted access to some small scale protected areas with the highest level of protection). In addition areas suitable for tourism (eg. large water dams and local objects significant for tourism as castles, caves and another important cultural, landscape and natural sites) have been also added as imput to the layer. The areas with the highest ratings (values) are the best from the tourism perspective.</p>
+												<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/f25f21c1-f810-4a41-8045-2940f0322dc6" target="_blank">metadata</a>
+												</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+						</li>
+						<!-- V -->
+						<li>
+							<fieldset id="layer5">
+								<label class="checkbox" for="visible5">
+									<input id="visible5" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5" style="float:right">i</button>
+											<span><b>V. BIODIVERSITY</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer50">
+										<label class="checkbox" for="visible50">
+											<input id="visible50" class="visible"
+													type="checkbox" /></label>
+													<span>Quality of the area in terms of biological diversity (Min: 0; Max: 6000)</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer51">
+										<label class="checkbox" for="visible51">
+											<input id="visible51" class="visible"
+													type="checkbox" /></label>
+													<span>Biodiversity – normalized</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal5" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">BIODIVERSITY</h4>
+												</div>
+												<div class="modal-body">
+												<p>Layer reflects the quality of the territory in terms of biological diversity. The layer was created from layers of qualitative assessment of occurrence approx. 250 selected protected species and their mutual overlay. The areas with the highest ratings (values) are the best in the biodiversity.</p>
+												<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/bee783ca-1a6e-4554-9f7b-1a4b0a24f39e" target="_blank">metadata</a>
+												</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
+						</li>
+						<!-- VI -->
+						<li>
+							<fieldset id="layer6">
+								<label class="checkbox" for="visible6">
+									<input id="visible6" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal6" style="float:right">i</button>
+											<span><b>VI. OVERALL ASSESSMENT OF ECOSYSTEM SERVICES</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer60">
+										<label class="checkbox" for="visible60">
+											<input id="visible60" class="visible"
+													type="checkbox" /></label>
+													<span>The total value of ecosystem services</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal6" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">OVERALL ASSESSMENT OF ECOSYSTEM SERVICES</h4>
+											</div>
+											<div class="modal-body">
+											<p>After the overlay of the normalized layers over final layer was created defining the Landscape quality from the perspective of the provision of these ecosystem services.</p>
+											<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/93c593fc-f997-45bb-b9fa-c11d91650b15" target="_blank">metadata</a>
+												</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+						</li>
+						<!-- VII -->
+						<li>
+							<fieldset id="layer7">
+								<label class="checkbox" for="visible7">
+									<input id="visible7" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal7" style="float:right">i</button>
+											<span>SDI4APPS OPEN LAND USE</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer70">
+										<label class="checkbox" for="visible70">
+											<input id="visible70" class="visible"
+													type="checkbox" /></label>
+													<span>Land Use</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li style="display:none;">
+									<fieldset id="layer71">
+										<label class="checkbox" for="visible71">
+											<input id="visible71" class="visible"
+													type="checkbox" /></label>
+													<span>Land Use Vector</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal7" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">SK OPEN LAND USE MAP</h4>
+											</div>
+											<div class="modal-body">
+											<p>Dataset contains information about existing land use in Slovakia, based on available open data resources.</p>
+											<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/e54a6f5b-0cac-4df8-8db3-e0c637d38efa" target="_blank">Metadata</a>
+													</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+						</li>
+						<!-- VIII -->
+						<li>
+							<fieldset id="layer8">
+								<label class="checkbox" for="visible8">
+									<input id="visible8" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal8" style="float:right">i</button>
+											<span>SDI4APPS OPEN TRANSPORT MAP</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer80">
+										<label class="checkbox" for="visible80">
+											<input id="visible80" class="visible"
+													type="checkbox" /></label>
+													<span>Fifth-class roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer81">
+										<label class="checkbox" for="visible81">
+											<input id="visible81" class="visible"
+													type="checkbox" /></label>
+													<span>Fourth-class roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer82">
+										<label class="checkbox" for="visible82">
+											<input id="visible82" class="visible"
+													type="checkbox" /></label>
+													<span>Third-class roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer83">
+										<label class="checkbox" for="visible83">
+											<input id="visible83" class="visible"
+													type="checkbox" /></label>
+													<span>Second-class roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer84">
+										<label class="checkbox" for="visible84">
+											<input id="visible84" class="visible"
+													type="checkbox" /></label>
+													<span>First-class roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer85">
+										<label class="checkbox" for="visible85">
+											<input id="visible85" class="visible"
+													type="checkbox" /></label>
+													<span>Main roads</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal8" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Open Transport Map</h4>
+											</div>
+											<div class="modal-body">
+											<p>The Open Transport Map allows routing and dynamic visualization of traffic volumes. It also offers many other ways of innovative exploitation. The underlying data are accessible in an open INSPIRE compatible format.</p>
+											<div>
+														<a href="http://www.opentransportnet.eu/php/metadata/?ak=detailall&uuid=56d989be-9f48-40d5-8357-651b0af05f18" target="_blank">Metadata</a>
+													</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- VIII -->
+						<li>
+							<fieldset id="layer9">
+								<label class="checkbox" for="visible9">
+									<input id="visible9" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal9" style="float:right">i</button>
+											<span>SDI4APPS SMART POINTS OF INTEREST</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer90">
+										<label class="checkbox" for="visible90">
+											<input id="visible90" class="visible"
+													type="checkbox" /></label>
+													<span>Professional and public</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								
+								<li>
+									<fieldset id="layer91">
+										<label class="checkbox" for="visible91">
+											<input id="visible91" class="visible"
+													type="checkbox" /></label>
+													<span>Outdoors</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								
+								<li>
+									<fieldset id="layer92">
+										<label class="checkbox" for="visible92">
+											<input id="visible92" class="visible"
+													type="checkbox" /></label>
+													<span>Others</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								
+								<li>
+									<fieldset id="layer93">
+										<label class="checkbox" for="visible93">
+											<input id="visible93" class="visible"
+													type="checkbox" /></label>
+													<span>Lodging</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								
+								<li>
+									<fieldset id="layer94">
+										<label class="checkbox" for="visible94">
+											<input id="visible94" class="visible"
+													type="checkbox" /></label>
+													<span>Natural Features</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer95">
+										<label class="checkbox" for="visible95">
+											<input id="visible95" class="visible"
+													type="checkbox" /></label>
+													<span>Culture and Entertainment</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer96">
+										<label class="checkbox" for="visible96">
+											<input id="visible96" class="visible"
+													type="checkbox" /></label>
+													<span>Food and drink</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer97">
+										<label class="checkbox" for="visible97">
+											<input id="visible97" class="visible"
+													type="checkbox" /></label>
+													<span>Shopping</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer98">
+										<label class="checkbox" for="visible98">
+											<input id="visible98" class="visible"
+													type="checkbox" /></label>
+													<span>Transportation</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer99">
+										<label class="checkbox" for="visible99">
+											<input id="visible99" class="visible"
+													type="checkbox" /></label>
+													<span>Car services</span>
+										
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+							
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal9" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">SPOI data set</h4>
+											</div>
+											<div class="modal-body">
+											<p>The Smart Points of Interest data set is the seamless and open resource of POIs that is available for other users to download, search or reuse in applications and services.</p>
+											<p>Its principal target is to provide information as Linked data together with other data set containing road network.</p>
+											<p>The added value of the Smart approach in comparison to other similar solutions consists in implementation of linked data, using of standardized and respected datatype properties and development of the completely harmonized data set with uniform data model and common classification.</p>
+											<div>
+														<a href="http://www.opentransportnet.eu/php/metadata/?request=GetRecords&format=text/html&language=eng&query=AnyText%20like%20%27*SPOI*%27" target="_blank">Metadata</a>
+													</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+			</div>
+			<div id="loaderGif" style="display:none;"><img src="/ol3/img/gears.gif"/></div>
+		</div>
+	</div>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	<script src="../js/example-behaviour.js" type="text/javascript"></script>
+	<script src="loader.js?id=ess_v2_eng" type="text/javascript"></script>
+	<!--
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>-->
+				<script src="../js/search.js"></script>
+				<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="//cdn.rawgit.com/fgnass/spin.js/2.3.0/spin.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+</html>

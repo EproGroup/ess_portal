@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>WFS</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v3.19.1/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var vectorSource = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: function(extent) {
+          return 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=WFS&' +
+              'version=1.1.0&request=GetFeature&typename=sk_zbgis:hranice_kraje_1_3857&' +
+              'outputFormat=application/json&srsname=EPSG:3857&' +
+              'bbox=' + extent.join(',') + ',EPSG:3857';
+        },
+        strategy: ol.loadingstrategy.bbox
+      });
+
+
+      var vector = new ol.layer.Vector({
+        source: vectorSource,
+        style: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'rgba(0, 0, 255, 1.0)',
+            width: 2
+          })
+        })
+      });
+
+      var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var map = new ol.Map({
+        layers: [raster, vector],
+        target: document.getElementById('map'),
+        view: new ol.View({
+          center: ol.proj.transform([19.156944, 48.738611], 'EPSG:4326', 'EPSG:3857'),
+          maxZoom: 19,
+          zoom: 8
+        })
+      });
+    </script>
+  </body>
+</html>

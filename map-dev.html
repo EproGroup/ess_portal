@@ -1,0 +1,597 @@
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<link rel="stylesheet" href="css/ol.css" type="text/css" />
+		<link rel="stylesheet" href="css/layout.css" type="text/css" />
+		<link rel="stylesheet" href="css/bootstrap/css/bootstrap-responsive.min.css" type="text/css" />
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="js/lib/jquery-ui/jquery-ui.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+		
+
+	<style type="text/css">
+	#layertree li fieldset > span{
+	cursor:pointer;
+	padding-left: 10px;
+	}
+	#over 	{
+			bottom: 630px;
+			z-index: 99;
+			
+			}
+	</style>
+		<!-- Piwik -->
+		<script type="text/javascript">
+		var _paq = _paq || [];
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//bolegweb.geof.unizg.hr/piwik/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 9]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		})();
+		</script>
+		<noscript><p><img src="//bolegweb.geof.unizg.hr/piwik/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
+		<!-- End Piwik Code -->
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+		//$("input[type=range]").slice( 3 ).val(0.3);
+		$( "#removeAll" ).first().click(function() {
+		$( "#visible1" ).click();
+		$( "#visible2" ).click();
+		$( "#visible3" ).click();
+		$( "#visible4" ).click();
+		$( "#visible5" ).click();
+		$( "#visible6" ).click();
+		});
+		image1 = '<a href="http://147.251.252.167:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage" target="_new"><img src="http://a.fsdn.com/allura/p/geoserver/icon" width="22px" title="GeoServer Web GIS Server"></img></a>';
+		image2 = '<a href="http://147.251.252.167:8080/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities" target="_new"><img src="http://www.cali.gov.co/info/principal/media/img5601" height="22px" title="OGC WMS GetCapabilities"></img></a>';
+		image3 = '<a href="https://themes.jrc.ec.europa.eu/groups/profile/1712/land-use" target="_new"><img src="https://themes.jrc.ec.europa.eu/groupicon/1712/large/1417866700.jpg" height="22px" title="Land Use : INSPIRE Thematic Clusters"></img></a>';
+		
+		$('button[title="Attributions"]').after( image1+image2+image3 );
+		});
+	</script>
+	
+<!-- 	<script type="text/javascript">
+		$(document).ready(function () {
+			$( "#popup" ).onclick(function() {
+				$( "#popup" ).draggable();
+			});
+		});
+	</script> -->
+	<!-- 	<script>
+	$(document).ready(function () {
+		$( "#info" ).children().click(function() {
+			$('#leg1').show(); 
+			});
+	});
+	</script> -->
+	<title>SK Pilot Hodnotenie Ekosystémových Služieb</title>
+</head>
+<body>
+	<div class="navbar" style="background-color: #009EE0;">
+	<div style="background-color: #333; font-size: 17px; color: #fff; "><div class="container">SDI 4 APPS - UPTAKE OF OPEN GEOGRAPHIC INFORMATION THROUGH INNOVATIVE SERVICES BASED ON LINKED DATA</div></div>
+		<div class="navbar-inner" >
+			<div style="float: left; padding-left: 5px;">
+				<a href="http://sdi4apps.eu/" target="_blank" ><img style="padding-top: 20px; padding-left: 20px;"
+							src="img/sdi4apps_logo_web.png"/></a>
+			</div>
+			<div style="float: left; padding-left: 50px; padding-top: 12px;">
+				<h2  class="navbar-text" style="color: white;">SK Pilot Hodnotenie Ekosystémových Služieb</h2>
+			</div>
+			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="." style="color: white">VERZIA 1</a></div>
+			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="eng/map-dev.html" style="color: white">ENGLISH</a></div>
+					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="map-dev.html" style="color: white">MAPA</a></div>
+					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="index-dev.html" style="color: white">HOME</a></div>
+		</div>
+	</div>
+	<div id="wrapper" class="container-fluid">
+		<div class="row-fluid">
+			<div class="span6">
+
+				<div id="map" class="map"></div>
+				<div id="over" class="col-xs-6 col-xs-offset-3">
+					<!-- Search Bar -->
+					<form id="placename-search" >
+						<div class="form-group" >
+							<input type="text" class="form-control" id="placename-input" placeholder="HĽADAJ LOKALITU PODĽA NÁZVU (napr. slovensky raj )">
+						</div>
+					</form>
+				</div>
+	
+				<div id="belowmapbuttons" style="bottom: 40px;position: relative; display: inline-block;">
+					<button type="button" class="btn btn-info" id="removeAll">ZAPNI/VYPNI TEMATICKÉ VRSTVY</button>
+					<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalTypy">TYPY VRSTIEV</button>
+									<!-- Modal -->
+						<div class="modal fade" id="myModalTypy" role="dialog">
+							<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Typy vrstiev hodnotených ESS</h4>
+								</div>
+								<div class="modal-body">
+								<p><b>Základné vrstvy</b> vyjadrujú objem úžitkov poskytovaných danou ekosystémovou službou vo fyzických jednotkách tak ako boli vyhodnotené. Napr. m3 drevnej hmoty alebo m3 uhlíka pri vrstve ukladania uhlika v jedntlivých typoch krajiny.</p>
+								<p><b>Normalizované vrstvy</b> sú vytvorené z vrstiev 5 hodnotených ESS tak, že hodnoty v jednotlivých vrstvách boli prevedené (znormalizované) na hodnoty 0-1. Takéto normalizovanie veľmi jednoduchým spôsobom umožňuje kvalitatívne porovnávať a zlučovať rôzne vrstvy.</p>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							</div>
+						</div>
+				</div>
+	  
+				<div id="popup" class="ol-popup">
+					<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+					<div id="popup-content">
+						<div id="md-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">HODNOTY INDIKATOROV PRE VYBRANU LOKALITU</h4>
+							</div>
+							<div id="md-info-body" class="modal-body" >
+							</div>
+							<div class="modal-footer">
+								<button id="btn-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+	
+			<div id="layertree" class="span6">
+					<ul class="chk-container">
+						<!-- BASE LAYERS -->
+						<li>
+							<fieldset id="layer0">
+								<label class="checkbox" for="visible0" id="label0">
+									<input id="visible0" class="visible" type="checkbox" />
+								</label>
+								<span>PODKLADOVÉ VRSTVY</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;" />
+							</fieldset>
+							
+							<ul>
+								<li>
+									<fieldset id="layer00">
+										<label class="checkbox" for="visible00">
+											<input id="visible00" class="visible"
+													type="checkbox"/></label>
+													<span>Open Street Map</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer01">
+										<label class="checkbox" for="visible01">
+											<input id="visible01" class="visible"
+													type="checkbox" /></label>
+													<span>World Borders</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;" />
+									</fieldset>
+								</li>
+								<!--
+								<li>
+									<fieldset id="layer02">
+										<label class="checkbox" for="visible02">
+											<input id="visible02" class="visible"
+													type="checkbox" /></label>
+													<span>Využitie územia</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;" />
+									</fieldset>
+								</li>
+								-->
+							</ul>
+						</li>
+						<!-- I -->
+						<li>
+							<fieldset id="layer1">
+								<label class="checkbox" for="visible1">
+									<input id="visible1" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" style="float:right">i</button>
+											<span><b>I. PRODUKCIA DREVNEJ HMOTY</b></span>
+											
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>						
+						<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal1" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">PRODUKCIA DREVNEJ HMOTY</h4>
+												</div>
+												<div class="modal-body">
+												<p>Vrstva vznikala z podkladovej vrstvy Corine Landcover 2006 a boli
+								v nej hodnotené kategórie lesa podľa rozdelenia Corine.
+								(Ihličnatý les, zmiešaný les, listnatý les). Jednotlivým bunkám
+								vrstvy bola priradená priemerna hodnota prírastku drevnej hmoty
+								v danom type lesa za rok.</p>
+												<div>
+													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/60a5e3b5-221a-4ebd-a6a7-d3cc9cc73a9c" target="_blank">Metadata</a>
+												</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+										</div>
+							<ul>
+								<li>
+									<fieldset id="layer10">
+										<label class="checkbox" for="visible10">
+											<input id="visible10" class="visible"
+													type="checkbox" /></label>
+													<span>Objem drevnej hmoty vyprodukovanej v tonách na ploche 1 ha za rok</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer11">
+										<label class="checkbox" for="visible11">
+											<input id="visible11" class="visible"
+													type="checkbox" /></label>
+													<span>Objem drevnej hmoty vyprodukovanej na ploche 1 ha za rok - normalizovaný.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- II -->
+						<li>
+							<fieldset id="layer2">
+								<label class="checkbox" for="visible2">
+									<input id="visible2" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2" style="float:right">i</button>
+											<span><b>II. POČET KUSOV DOBYTKA NA HEKTÁR PASIENKOV</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+						<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal2" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">POČET KUSOV DOBYTKA NA HEKTÁR PASIENKOV</h4>
+												</div>
+												<div class="modal-body">
+													<p>Vrstva vyjadruje počet kusov dobytka na 1ha pasienkov v danom okrese. Vrstva vznikla ako kombinácia štatistických údajov o stave dobytka v jednotlivých okresoch SR a pasienkov vhodných na chov dobytka.</p>
+													<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/72c30223-b45d-4c08-9ed2-3a6e85f49b45" target="_blank">Metadata</a>
+													</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+							<ul>
+								<li>
+									<fieldset id="layer20">
+										<label class="checkbox" for="visible20">
+											<input id="visible20" class="visible"
+													type="checkbox" /></label>
+													<span>Počet kusov dobytka na 1ha pasienkov.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer21">
+										<label class="checkbox" for="visible21">
+											<input id="visible21" class="visible"
+													type="checkbox" /></label>
+										<span>Počet kusov dobytka na 1ha pasienkov - normalizovaný.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- III -->
+						<li>
+							<fieldset id="layer3">
+								<label class="checkbox" for="visible3">
+									<input id="visible3" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal3" style="float:right">i</button>
+											<span><b>III. UKLADANIE UHLÍKA V JEDNOTLIVÝCH TYPOCH KRAJINY</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>						
+							<div class="container">
+											<!-- Modal -->
+											<div class="modal fade" id="myModal3" role="dialog">
+												<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">UKLADANIE UHLÍKA V JEDNOTLIVÝCH TYPOCH KRAJINY</h4>
+													</div>
+													<div class="modal-body">
+													<p>Vrstva definuje objem ukladaného CO2 v krajine v tonách za rok. Vrstva vznikla ohodnotením typov krajiny podľa Corine landcover a priradenie jednotlivým typom krajiny hodnoty ukladania CO2.</p>
+													<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/dee6567e-59ed-42ad-a974-3d119a7c383f" target="_blank">Metadata</a>
+													</div>
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+												</div>
+											</div>
+										</div>
+								<ul>
+								<li>
+									<fieldset id="layer30">
+										<label class="checkbox" for="visible30">
+											<input id="visible30" class="visible"
+													type="checkbox" /></label>
+													<span>Objem ukladaného CO2 v krajine v tonách za rok</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer31">
+										<label class="checkbox" for="visible31">
+											<input id="visible31" class="visible"
+													type="checkbox" /></label>
+													<span>Objem ukladaného CO2 v krajine v tonách za rok - normalizovaný.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- IV -->
+						<li>
+							<fieldset id="layer4">
+								<label class="checkbox" for="visible4">
+									<input id="visible4" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal4" style="float:right">i</button>
+											<span><b>IV. KVALITA ÚZEMIA Z HĽADISKA CESTOVNÉHO RUCHU</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+						<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal4" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">KVALITA ÚZEMIA Z HĽADISKA CESTOVNÉHO RUCHU</h4>
+												</div>
+												<div class="modal-body">
+												<p>Vrstva vyjadruje potenciál územia na využitie z hľadiska cestovného ruchu. Vrstva bola hodnotená ako sumár ohodnotených plôch a bodov potenciálne zaujámavých pre využitie pre cestovný ruch. Ako vstupy boli do vrstvy zapojené chránené územia ohodnotené podľa významnosti pričom boli zohľadnené legislatívne obmedzenia prístupu (napr. Obmedzenie prístupu do niektorých maloplošných chránených území s najvyšším stupňom ochrany). Do vrstvy boli taktiež zapojené územia vhodné na rekreáciu ako napr. veľké vodné nádrže a lokálne významné objekty pre cestovný ruch ako napr. hrady, jaskyne a ďalšie významné kultúrne, krajinné a prírodné lokality. Územia s najvyšším hodnotením majú najlepšiu kvalitu územia z hľadiska cestovného ruchu.</p>
+												<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/56eacb0f-0294-4019-89aa-753ac0a80137" target="_blank">Metadata</a>
+													</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+							<ul>
+								<li>
+									<fieldset id="layer40">
+										<label class="checkbox" for="visible40">
+											<input id="visible40" class="visible"
+													type="checkbox" /></label>
+													<span>Potenciál územia na využitie z hľadiska cestovného ruchu (Min: 1; Max: 10)</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer41">
+										<label class="checkbox" for="visible41">
+											<input id="visible41" class="visible"
+													type="checkbox" /></label>
+													<span>Potenciál územia na využitie z hľadiska cestovného ruchu - normalizovaný.</span>
+										<input class="opacity" type="range" min="0" max="1"
+												step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- V -->
+						<li>
+							<fieldset id="layer5">
+								<label class="checkbox" for="visible5">
+									<input id="visible5" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5" style="float:right">i</button>
+											<span><b>V. BIODIVERZITA</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							<div class="container">
+										<!-- Modal -->
+										<div class="modal fade" id="myModal5" role="dialog">
+											<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">BIODIVERZITA</h4>
+												</div>
+												<div class="modal-body">
+												<p>Vrstva vyjadruje kvalitu územia z hľadiska biologickej diverzity. Vrstva vznikla z vrstiev kvalitatívneho ohodnotenia výskytu cca. 250 vybraných chránených druhov a ich vzájomným preložením. Územia s najvyšším hodnotením majú najlepšiu biodiverzitu.</p>
+												<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/987bcd36-d403-4b0c-b2cc-879c8d582f84" target="_blank">Metadata</a>
+													</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
+							<ul>
+								<li>
+									<fieldset id="layer50">
+										<label class="checkbox" for="visible50">
+											<input id="visible50" class="visible"
+													type="checkbox" /></label>
+													<span>Kvalita územia z hľadiska biologickej diverizity (Min: 0; Max: 6000)</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer51">
+										<label class="checkbox" for="visible51">
+											<input id="visible51" class="visible"
+													type="checkbox" /></label>
+													<span>Biodiverzita - normovaná</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- VI -->
+						<li>
+							<fieldset id="layer6">
+								<label class="checkbox" for="visible6">
+									<input id="visible6" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal6" style="float:right">i</button>
+											<span><b>VI. CELKOVÉ HODNOTENIE EKOSYSTÉMOVÝCH SLUŽIEB</b></span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal6" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">CELKOVÉ HODNOTENIE EKOSYSTÉMOVÝCH SLUŽIEB</h4>
+											</div>
+											<div class="modal-body">
+											<p>Preložením čiastkových normalizovaných vrstiev cez seba vznikla výsledná vrstva, ktorá definuje kvalitu územia z hľadiska poskytovania týchto ekosystémových služieb.</p>
+											<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/eeeb0306-798a-4327-8fa7-95a634f70367" target="_blank">Metadata</a>
+													</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<ul>
+								<li>
+									<fieldset id="layer60">
+										<label class="checkbox" for="visible60">
+											<input id="visible60" class="visible"
+													type="checkbox" /></label>
+													<span>Celková hodnota ekosystémových služieb</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+						<!-- VII -->
+						<li>
+							<fieldset id="layer7">
+								<label class="checkbox" for="visible7">
+									<input id="visible7" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal7" style="float:right">i</button>
+											<span>VYUŽITIE ÚZEMIA</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal7" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">SK OTVORENÁ MAPA VYUŽITIA ÚZEMIA</h4>
+											</div>
+											<div class="modal-body">
+											<p>Dataset bol vytvorený zo série dostupných otvorených dátových zdrojov s cieľom identifikovať aktuálne využitie územia v rámci konkrétnej lokality v Slovenskej Republike.</p>
+											<div>
+														<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/6dd09a7f-0385-455f-9422-3aa55cc087d9" target="_blank">Metadata</a>
+													</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<ul>
+								<li>
+									<fieldset id="layer70">
+										<label class="checkbox" for="visible70">
+											<input id="visible70" class="visible"
+													type="checkbox" /></label>
+													<span>Využitie územia</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+							</ul>
+						</li>
+					</ul>
+			</div>								
+		</div>
+	</div>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/example-behaviour.js" type="text/javascript"></script>
+	<script src="js/loader.js?id=ess_v2" type="text/javascript"></script>
+	<!--
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>-->
+				<script src="js/search.js"></script>
+				<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="//cdn.rawgit.com/fgnass/spin.js/2.3.0/spin.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>	
+</body>
+</html>
