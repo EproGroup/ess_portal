@@ -54,3 +54,24 @@ $('#placename-search').on('submit', function(e) {
     }
   });
 });
+
+//Instantiate with some options and add the Control
+/*
+	var geocoder = new Geocoder('nominatim', {
+			provider : 'photon',
+			lang : 'en',
+			placeholder : 'Search for place ...',
+			limit : 10,
+			keepOpen : true
+		});
+	map.addControl(geocoder);
+
+	//Listen when an address is chosen
+	geocoder.on('addresschosen', function (evt) {
+		var feature = evt.feature,
+		coord = evt.coordinate,
+		address_html = feature.get('address_html');
+		content.innerHTML = '<p>' + address_html + '</p>';
+		overlay.setPosition(coord);
+	});
+	*/

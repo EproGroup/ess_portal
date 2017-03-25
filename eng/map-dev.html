@@ -8,15 +8,10 @@
 		<link rel="stylesheet" href="/ol3/css/layout.css" type="text/css" />
 		<link rel="stylesheet" href="/ol3/css/bootstrap/css/bootstrap-responsive.min.css" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="/ol3/css/sweetalert/sweetalert2.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="../js/lib/jquery-ui/jquery-ui.min.js"></script>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="../js/lib/jquery-ui/jquery-ui.min.js"></script>		
 		<script>
 			$(document).ready(function () {
 				$(document).ajaxStart(function () {
@@ -25,7 +20,7 @@
 				$(document).ajaxComplete(function () {
 					$("#loaderGif").css("display", "none");
 				});
-				$('#visible70').click(function(){$('#visible71').click()})
+				//$('#visible70').click(function(){$('#visible71').click()})
 			});
 		</script>
 
@@ -42,7 +37,17 @@
 			z-index: 99;
 			
 			}
+		/*
+		.modal-backdrop {
+			  display: none !important;
+			}
+			.modal-open .modal {
+				width: auto;
+				margin: 0 auto;
+			}
+			*/
 				</style>
+
 	
 		<!-- Piwik -->
 		<script type="text/javascript">
@@ -71,8 +76,8 @@
 		$( "#visible5" ).click();
 		$( "#visible6" ).click();
 		});
-		image1 = '<a href="http://147.251.252.167:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage" target="_new"><img src="http://a.fsdn.com/allura/p/geoserver/icon" width="22px" title="GeoServer Web GIS Server"></img></a>';
-		image2 = '<a href="http://147.251.252.167:8080/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities" target="_new"><img src="http://www.cali.gov.co/info/principal/media/img5601" height="22px" title="OGC WMS GetCapabilities"></img></a>';
+		image1 = '<a href="http://skpilot-viewer.virt.ics.muni.cz/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage" target="_new"><img src="http://a.fsdn.com/allura/p/geoserver/icon" width="22px" title="GeoServer Web GIS Server"></img></a>';
+		image2 = '<a href="http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities" target="_new"><img src="http://www.cali.gov.co/info/principal/media/img5601" height="22px" title="OGC WMS GetCapabilities"></img></a>';
 		image3 = '<a href="https://themes.jrc.ec.europa.eu/groups/profile/1712/land-use" target="_new"><img src="https://themes.jrc.ec.europa.eu/groupicon/1712/large/1417866700.jpg" height="22px" title="Land Use : INSPIRE Thematic Clusters"></img></a>';
 		
 		$('button[title="Attributions"]').after( image1+image2+image3 );
@@ -96,27 +101,53 @@
 	<title>SK Pilot Ecosystem Services Evaluation</title>
 </head>
 <body>
-	<div class="navbar" style="background-color: #009EE0;">
-	<div style="background-color: #333; font-size: 17px; color: #fff; "><div class="container">SDI 4 APPS - UPTAKE OF OPEN GEOGRAPHIC INFORMATION THROUGH INNOVATIVE SERVICES BASED ON LINKED DATA</div></div>
-		<div class="navbar-inner" >
-			<div style="float: left; padding-left: 5px;">
-				<a href="http://sdi4apps.eu/" target="_blank" ><img style="padding-top: 20px; padding-left: 20px;"
-							src="../img/sdi4apps_logo_web.png"/></a>
-			</div>
-			<div style="float: left; padding-left: 50px; padding-top: 12px;">
-				<h2  class="navbar-text" style="color: white;">SK Pilot Ecosystem Services Evaluation</h2>
-			</div>
-			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="." style="color: white">VERSION 1</a></div>
-			<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="../map-dev.html" style="color: white">SLOVAK</a></div>
-					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="map-dev.html" style="color: white">MAP</a></div>
-					<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="index-dev.html" style="color: white">HOME</a></div>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-full" >
+		<div style="background-color: #333; font-size: 17px; color: #fff; letter-spacing: 0.05em; padding: 6px 0; text-transform: uppercase; font-family: 'Montserrat',sans-serif; font-weight: 700;">
+			<div class="container">SDI 4 Apps - Uptake of open geographic information through innovative services based on linked data</div>
 		</div>
-	</div>
+     
+      <div id="navbar" class="navbar-collapse collapse" style="background-color: #009EE0; ">
+	   <div class="nav navbar-nav navbar-left" >
+        <a href="http://sdi4apps.eu/" target="_blank" ><img style="padding-top: 5%; padding-left: 5%; width:150px" src="http://portal.sdi4apps.eu/sdi4apps-theme/images/sdi4apps_logo_web.png"/></a>
+      </div>
+	  <div style="float: left; padding-left: 50px; padding-top: 12px;">
+				<h2  class="navbar-text" style="color: white;">SK Pilot Ecosystem Services Evaluation App</h2>
+			</div>
+        <!--
+		<div class="dropdown" style="float:right; padding-right: 1%;" >
+             <a class="dropdown-toggle" type="button" data-toggle="dropdown"><h4 style="color:white;">MENU <span class="caret"></span></h4></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+			<li class="dropdown-header">VIEWER</li>
+              <li><a href="#">Slovak version</a></li>
+			  <li class="divider"></li>
+			  <li class="dropdown-header">PORTAL</li>
+			  <li><a href="/layers/">Home</a></li>
+			  <li><a href="/account/login/?next=/account/signup/">Log in</a></li>
+			  <li><a href="/account/signup/">Sign up</a></li>
+			  <li><a href="/maps/">Maps</a></li>
+            </ul>
+        </div>
+		-->
+		<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="/" style="color: white">ESS PORTAL</a></div>
+		<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="." style="color: white">VERSION 1</a></div>
+		<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="../map-dev.html" style="color: white">SLOVAK</a></div>
+		<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="map-dev.html" style="color: white">MAP</a></div>
+		<div style="float: right; margin-right: 15px; margin-top: 50px;"><a href="index-dev.html" style="color: white">HOME</a></div>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+  </nav>
+
 	<div id="wrapper" class="container-fluid">
 		<div class="row-fluid">
 			<div class="span6">
+			
+			
 
 				<div id="map" class="map" style= "height:75vh";></div>
+				
 				<div id="over" class="col-xs-6 col-xs-offset-3">
 					<!-- Search Bar -->
 					<form id="placename-search" >
@@ -233,7 +264,9 @@
 								<label class="checkbox" for="visible1">
 									<input id="visible1" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal11" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" style="float:right">i</button>
+											
 											<span><b>I. WOOD (PAPER PULP) PRODUCTION</b></span>
 											
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -267,13 +300,14 @@
 											<div class="modal-dialog modal-lg">
 											<div class="modal-content">
 												<div class="modal-header">
+												
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">WOOD (PAPER PULP) PRODUCTION</h4>
 												</div>
 												<div class="modal-body">
 												<p>Layer was created on the top of the Corine Landcover 2006, where forest categories were evaluated based on Corine classification. (Coniferous forest, deciduous forest, mixed forest). Individual cells of the layers were assigned with average value of forest growth in this type of forest per year.</p>
 												<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/aacbbe25-b72c-4f5f-9462-e60088d1f5e4" target="_blank">metadata</a>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A1_lesy_biomasa#more" target="_blank"><h4>metadata</h4></a>
 												</div>
 												</div>
 												<div class="modal-footer">
@@ -282,7 +316,27 @@
 											</div>
 											</div>
 										</div>
+							</div>
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal11" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">WOOD (PAPER PULP) PRODUCTION MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:1_lesy_biomasa_norm&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
 										</div>
+							</div>
 						</li>
 						<!-- II -->
 						<li>
@@ -290,6 +344,7 @@
 								<label class="checkbox" for="visible2">
 									<input id="visible2" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal22" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2" style="float:right">i</button>
 											<span><b>II. NUMBER OF LIVESTOCK PER HECTARE OF PASTURE</b></span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -317,7 +372,26 @@
 									</fieldset>
 								</li>
 							</ul>
-							
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal22" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">NUMBER OF LIVESTOCK PER HECTARE OF PASTURE MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:2_dobytok_norm&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
 							<div class="container">
 										<!-- Modal -->
 										<div class="modal fade" id="myModal2" role="dialog">
@@ -330,7 +404,7 @@
 												<div class="modal-body">
 												<p>Layer represents the number of livestock grazing on one hectare in a given district. Layer was formed as a combination of statistical data number of animals in the various districts of the Slovakia and suitable pastures for grazing livestock.</p>
 												<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/0179d7ac-f044-4baf-82a0-4179b740b2e2" target="_blank">metadata</a>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A2_dobytok_float#more" target="_blank"><h4>metadata</h4></a>
 												</div>
 												</div>
 												<div class="modal-footer">
@@ -347,6 +421,7 @@
 								<label class="checkbox" for="visible3">
 									<input id="visible3" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal33" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal3" style="float:right">i</button>
 											<span><b>III. CARBON SEQUESTRATION BASED ON LAND TYPES</b></span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -374,7 +449,26 @@
 									</fieldset>
 								</li>
 							</ul>
-							
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal33" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">CARBON SEQUESTRATION BASED ON LAND TYPES MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:3_uhlik_norm&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
 							<div class="container">
 											<!-- Modal -->
 											<div class="modal fade" id="myModal3" role="dialog">
@@ -387,8 +481,8 @@
 													<div class="modal-body">
 													<p>Layer defines the volume of CO2 sequestration in the country by tons per year. Layer was created by assessing landscapes types according the Corine Landcover and assignment of values ​of CO2 sequestration for particular land type.</p>
 													<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/6119d24a-1faf-42fd-8cdf-eb5fc3e3ba5e" target="_blank">metadata</a>
-													</div>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A3_uhlik#more" target="_blank"><h4>metadata</h4></a>
+												</div>
 													</div>
 													<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -404,6 +498,7 @@
 								<label class="checkbox" for="visible4">
 									<input id="visible4" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal44" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal4" style="float:right">i</button>
 											<span><b>IV. LANDSCAPE QUALITY FROM TOURISM PERSPECTIVE</b></span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -431,7 +526,26 @@
 									</fieldset>
 								</li>
 							</ul>
-							
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal44" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">LANDSCAPE QUALITY FROM TOURISM PERSPECTIVE MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:4_CR_norm&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
 							<div class="container">
 										<!-- Modal -->
 										<div class="modal fade" id="myModal4" role="dialog">
@@ -439,12 +553,12 @@
 											<div class="modal-content">
 												<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">KVALITA ÚZEMIA Z HĽADISKA CESTOVNÉHO RUCHU</h4>
+												<h4 class="modal-title">LANDSCAPE QUALITY FROM TOURISM PERSPECTIVE</h4>
 												</div>
 												<div class="modal-body">
 												<p>Layer expresses potential of the area for tourism. Layer was evaluated as summary of areas and points potentially interesting for tourism. As inputs connected layers of protected areas evaluated according to their relevance were used. Taking into the consideration legal access restrictions (eg. Restricted access to some small scale protected areas with the highest level of protection). In addition areas suitable for tourism (eg. large water dams and local objects significant for tourism as castles, caves and another important cultural, landscape and natural sites) have been also added as imput to the layer. The areas with the highest ratings (values) are the best from the tourism perspective.</p>
 												<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/f25f21c1-f810-4a41-8045-2940f0322dc6" target="_blank">metadata</a>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A4_CR#more" target="_blank"><h4>metadata</h4></a>
 												</div>
 												</div>
 												<div class="modal-footer">
@@ -461,6 +575,7 @@
 								<label class="checkbox" for="visible5">
 									<input id="visible5" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal55" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5" style="float:right">i</button>
 											<span><b>V. BIODIVERSITY</b></span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -491,6 +606,26 @@
 								</li>
 							</ul>
 							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal55" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">BIODIVERSITY MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:5_biodiv_norm&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
+							<div class="container">
 										<!-- Modal -->
 										<div class="modal fade" id="myModal5" role="dialog">
 											<div class="modal-dialog modal-lg">
@@ -502,7 +637,7 @@
 												<div class="modal-body">
 												<p>Layer reflects the quality of the territory in terms of biological diversity. The layer was created from layers of qualitative assessment of occurrence approx. 250 selected protected species and their mutual overlay. The areas with the highest ratings (values) are the best in the biodiversity.</p>
 												<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/bee783ca-1a6e-4554-9f7b-1a4b0a24f39e" target="_blank">metadata</a>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A5_biodiv_norm#more" target="_blank"><h4>metadata</h4></a>
 												</div>
 												</div>
 												<div class="modal-footer">
@@ -519,6 +654,7 @@
 								<label class="checkbox" for="visible6">
 									<input id="visible6" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal66" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal6" style="float:right">i</button>
 											<span><b>VI. OVERALL ASSESSMENT OF ECOSYSTEM SERVICES</b></span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
@@ -539,6 +675,26 @@
 								</li>
 							</ul>
 							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal66" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">OVERALL ASSESSMENT OF ECOSYSTEM SERVICES MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=sk_pilot_ess_rasters:6_sluzieb_norm_final&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
+							<div class="container">
 								<!-- Modal -->
 								<div class="modal fade" id="myModal6" role="dialog">
 									<div class="modal-dialog modal-lg">
@@ -550,7 +706,7 @@
 											<div class="modal-body">
 											<p>After the overlay of the normalized layers over final layer was created defining the Landscape quality from the perspective of the provision of these ecosystem services.</p>
 											<div>
-													<a href="http://bolegweb.geof.unizg.hr/geonetwork/srv/eng/catalog.search#/metadata/93c593fc-f997-45bb-b9fa-c11d91650b15" target="_blank">metadata</a>
+													<a href="http://skpilot-viewer.virt.ics.muni.cz/layers/sk_pilot_ess_rasters%3A6_sluzieb_norm_final#more" target="_blank"><h4>metadata</h4></a>
 												</div>
 											</div>
 											<div class="modal-footer">
@@ -567,36 +723,88 @@
 								<label class="checkbox" for="visible7">
 									<input id="visible7" class="visible" type="checkbox"
 											/></label>
+											<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal77" style="float:right; margin-left:10px">Legend</button>
 											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal7" style="float:right">i</button>
 											<span>SDI4APPS OPEN LAND USE</span>
 								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
 							</fieldset>
-							
-							
 							<ul style="display:none;">
 								<li>
 									<fieldset id="layer70">
 										<label class="checkbox" for="visible70">
 											<input id="visible70" class="visible"
 													type="checkbox" /></label>
-													<span>Land Use</span>
+													<span>Open Land Use Slovakia</span>
 										<!-- <label>opacity</label> -->
 										<input class="opacity" type="range" value="0" min="0"
 												max="1" step="0.01" style="width: 20%;"/>
 									</fieldset>
 								</li>
-								<li style="display:none;">
+								<li>
 									<fieldset id="layer71">
 										<label class="checkbox" for="visible71">
 											<input id="visible71" class="visible"
 													type="checkbox" /></label>
-													<span>Land Use Vector</span>
+													<span>Open Land Use Slovenia</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer72">
+										<label class="checkbox" for="visible72">
+											<input id="visible72" class="visible"
+													type="checkbox" /></label>
+													<span>Open Land Use Hungary</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer73">
+										<label class="checkbox" for="visible73">
+											<input id="visible73" class="visible"
+													type="checkbox" /></label>
+													<span>Open Land Use Republika Serbia</span>
+										<!-- <label>opacity</label> -->
+										<input class="opacity" type="range" value="0" min="0"
+												max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset id="layer74">
+										<label class="checkbox" for="visible74">
+											<input id="visible74" class="visible"
+													type="checkbox" /></label>
+													<span>Open Land Use Austria</span>
 										<!-- <label>opacity</label> -->
 										<input class="opacity" type="range" value="0" min="0"
 												max="1" step="0.01" style="width: 20%;"/>
 									</fieldset>
 								</li>
 							</ul>
+							<div class="container">
+									<!-- Modal -->
+										<div class="modal fade" id="myModal77" role="dialog" data-keyboard="false" data-backdrop="static">
+											<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">OPEN LAND USE MAP LEGEND</h4>
+												</div>
+												<div class="modal-body">
+												<img
+												src="http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=olu:lu_elu_object_sk&legend_options=fontAntiAliasing:true;fontSize:12;forceLabels:on"/>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
 							<div class="container">
 								<!-- Modal -->
 								<div class="modal fade" id="myModal7" role="dialog">
@@ -723,7 +931,7 @@
 								</div>
 							</div>
 						</li>
-						<!-- VIII -->
+						<!-- IX -->
 						<li>
 							<fieldset id="layer9">
 								<label class="checkbox" for="visible9">
@@ -851,6 +1059,7 @@
 								</li>
 							</ul>
 							
+							
 							<div class="container">
 								<!-- Modal -->
 								<div class="modal fade" id="myModal9" role="dialog">
@@ -876,14 +1085,49 @@
 								</div>
 							</div>
 						</li>
+						
+						<!-- X -->
+						
+						<!--
+						<li>
+							<fieldset id="layer10">
+								<label class="checkbox" for="visible10">
+									<input id="visible10" class="visible" type="checkbox"
+											/></label>
+											<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal9" style="float:right">i</button>
+											<span>ESS</span>
+								<input class="opacity" type="range" min="0" max="1" step="0.01" style="width: 20%;"/>
+							</fieldset>
+							
+							<ul style="display:none;">
+								<li>
+									<fieldset id="layer100">
+										<label class="checkbox" for="visible100">
+											<input id="visible100" class="visible"
+													type="checkbox" /></label>
+													<span>Ecosystems according EUNIS (CHKO Cerová Vrchovina)</span>
+													<input class="opacity" type="range" value="0" min="0" max="1" step="0.01" style="width: 20%;"/>
+									</fieldset>
+								</li>
 
-					</ul>
+							</ul>
+						</li>
+						-->
+						<div id="tipDiv" class="alert alert-success" style="width:50%;">
+				 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					  <strong>Tip!</strong> Double click on map gives you table and plot representations of the ecosystem services data  
+				</div>
 			</div>
+			
 			<div id="loaderGif" style="display:none;"><img src="/ol3/img/gears.gif"/></div>
+			
+			
 		</div>
+		
 	</div>
 	<script src="../js/jquery.min.js" type="text/javascript"></script>
 	<script src="../js/example-behaviour.js" type="text/javascript"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="loader.js?id=ess_v2_eng" type="text/javascript"></script>
 	<!--
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -892,7 +1136,6 @@
 				<script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <script src="//cdn.rawgit.com/fgnass/spin.js/2.3.0/spin.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </body>
 </html>

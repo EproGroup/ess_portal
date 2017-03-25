@@ -38,16 +38,27 @@ function escapeElementName(str) {
 }
 
 //SELECT ?o ?p ?s FROM <http://www.sdi4apps.eu/poi.rdf> WHERE { ?o ?p ?s. {SELECT ?o FROM <http://www.sdi4apps.eu/poi.rdf> WHERE {?o <http://www.opengis.net/ont/geosparql#asWKT> ?geom. ?o  <http://www.openvoc.eu/poi#categoryWaze> <http://www.openvoc.eu/waze_classification#Food_and_drink>. FILTER(isBlank(?geom) = false). <extent>} LIMIT 100}}
-var categoryWaze = ['http://www.openvoc.eu/waze_classification%23Natural_features',
-	'http://www.openvoc.eu/waze_classification%23Culture_%38_entertainment',
-	'http://www.openvoc.eu/waze_classification%23Food_and_drink',
-	'http://www.openvoc.eu/waze_classification%23Lodging',
-	'http://www.openvoc.eu/waze_classification%23Professional_and_public',
-	'http://www.openvoc.eu/waze_classification%23Shopping_and_services',
-	'http://www.openvoc.eu/waze_classification%23Transportation',
-	'http://www.openvoc.eu/waze_classification%23Other',
-	'http://www.openvoc.eu/waze_classification%23Outdoors',
-	'http://www.openvoc.eu/waze_classification%23Car_services'];
+var categoryWaze = ['http://gis.zcu.cz/SPOI/Ontology%23natural_feature',
+	'http://gis.zcu.cz/SPOI/Ontology%23culture_and_entertainment',
+	'http://gis.zcu.cz/SPOI/Ontology%23food_and_drink',
+	'http://gis.zcu.cz/SPOI/Ontology%23lodging',
+	'http://gis.zcu.cz/SPOI/Ontology%23professional_and_public',
+	'http://gis.zcu.cz/SPOI/Ontology%23shopping_and_service',
+	'http://gis.zcu.cz/SPOI/Ontology%23transportation',
+	'http://gis.zcu.cz/SPOI/Ontology%23other',
+	'http://gis.zcu.cz/SPOI/Ontology%23outdoor',
+	'http://gis.zcu.cz/SPOI/Ontology%23car_service',
+	'http://gis.zcu.cz/SPOI/Ontology%23camp_site',
+	'http://gis.zcu.cz/SPOI/Ontology%23information',
+	'http://gis.zcu.cz/SPOI/Ontology%23supermarket',
+	'http://gis.zcu.cz/SPOI/Ontology%23hotel',
+	'http://gis.zcu.cz/SPOI/Ontology%23restaurant',
+	'http://gis.zcu.cz/SPOI/Ontology%23pub',
+	'http://gis.zcu.cz/SPOI/Ontology%23fast_food',
+	'http://gis.zcu.cz/SPOI/Ontology%23cafe',
+	'http://gis.zcu.cz/SPOI/Ontology%23bank',
+	'http://gis.zcu.cz/SPOI/Ontology%23atm',
+	];
 
 //SELECT ?o ?p ?s FROM <http://www.sdi4apps.eu/poi.rdf> WHERE { ?o ?p ?s. {SELECT ?o FROM <http://www.sdi4apps.eu/poi.rdf> WHERE {?o <http://www.opengis.net/ont/geosparql#asWKT> ?geom. ?o <http://www.openvoc.eu/poi#categoryOSM> ?c0. FILTER(str(?c0) = <amenity.bank>). FILTER(isBlank(?geom) = false). <extent>} LIMIT 100}}
 var categoryOSM = ['amenity.arts_centre', 'amenity.atm', 'amenity.attraction', 'amenity.bank', 'amenity.bar', 'amenity.bbq', 'amenity.bicycle_parking', 'amenity.bicycle_rental', 'amenity.biergarten', 'amenity.bureau_de_change', 'amenity.bus_station', 'amenity.cafe', 'amenity.car_wash', 'amenity.clinic', 'amenity.dentist', 'amenity.doctors', 'amenity.embassy', 'amenity.fast_food', 'amenity.fire_station', 'amenity.food_court'];
@@ -226,231 +237,216 @@ var styleFunction = function (feature) {
 };
 
 // DEFINITION OF THE GEOSPATIAL DATA
+	
 var ess11 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:1_lesy_biomasa",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});	
 
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:1_lesy_biomasa",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
 
 var ess12 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:1_lesy_biomasa_norm",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:1_lesy_biomasa_norm",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});	
 
+
+		
 var ess21 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:2_dobytok_float",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:2_dobytok_float",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});	
 
+
+		
 var ess22 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:2_dobytok_norm",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:2_dobytok_norm",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});	
 
 var ess31 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:3_uhlik",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
-/*
-var ess31 = new ol.layer.Tile({
-source: new ol.source.XYZ({
-crossOrigin:null,
-url:'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:3_uhlik@EPSG:3857@png/{z}/{x}/{-y}.png'
-}),
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:3_uhlik",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
 visible : false,
-opacity : 0.75
-});
- */
+		opacity : 0.75
+});	
+
 var ess32 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:3_uhlik_norm",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
-/*
-var ess32 = new ol.layer.Tile({
-source: new ol.source.XYZ({
-crossOrigin:null,
-url:'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:3_uhlik_norm@EPSG:3857@png/{z}/{x}/{-y}.png'
-}),
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:3_uhlik_norm",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
 visible : false,
-opacity : 0.75
-});
- */
+		opacity : 0.75
+});	
+
+	
+	
 var ess41 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:4_CR",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:4_CR",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
+	
+
 
 var ess42 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			//preload: Infinity,
-			opacity : 0.5,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:4_CR_norm",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		})
-	});
-/*
-var ess42 = new ol.layer.Tile({
-source : new ol.source.XYZ({
-crossOrigin : null,
-url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:4_CR_norm@EPSG:3857@png/{z}/{x}/{-y}.png'
-}),
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:4_CR_norm",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
 visible : false,
-opacity : 0.75
+		opacity : 0.75
 });
- */
 
 var ess51 = new ol.layer.Tile({
-		source : new ol.source.TileWMS({
-			preload : Infinity,
-			visible : false,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-			serverType : 'geoserver',
-			crossOrigin : 'anonymous',
-			params : {
-				'LAYERS' : "sk_pilot_ess_rasters:5_biodiv",
-				'TILED' : true,
-				'FORMAT' : format,
-				'VERSION' : '1.1.1'
-			}
-		}),
-		visible : false,
-		opacity : 0.75
-	});
-/*
-var ess51 = new ol.layer.Tile({
-source : new ol.source.XYZ({
-crossOrigin : null,
-url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:5_biodiv@EPSG:3857@png/{z}/{x}/{-y}.png'
-}),
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:5_biodiv",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
 visible : false,
-opacity : 0.75
-});
- */
-/*
-var ess52 = new ol.layer.Tile({
-source : new ol.source.TileWMS({
-preload : Infinity,
-visible : false,
-url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
-serverType : 'geoserver',
-crossOrigin : 'anonymous',
-params : {
-'LAYERS' : "sk_pilot_ess_rasters:5_biodiv_norm",
-'TILED' : true,
-'FORMAT' : format,
-'VERSION' : '1.1.1'
-}
-})
-});
- */
-
-var ess52 = new ol.layer.Tile({
-		source : new ol.source.XYZ({
-			crossOrigin : null,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:5_biodiv_norm@EPSG:3857@png/{z}/{x}/{-y}.png'
-		}),
-		visible : false,
 		opacity : 0.75
-	});
+});
+	
+var ess52 = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "sk_pilot_ess_rasters:5_biodiv_norm",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
 
+/*
 var ess6 = new ol.layer.Tile({
 		source : new ol.source.XYZ({
 			crossOrigin : null,
 			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_pilot_ess_rasters:6_sluzieb_norm_final@EPSG:3857@png/{z}/{x}/{-y}.png'
-		})
+		}),
+		visible : false,
+		opacity : 0.75
 	});
+*/	
+	
+var ess6 = new ol.layer.Tile({
+source : new ol.source.TileWMS({
+preload : Infinity,
+url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+serverType : 'geoserver',
+crossOrigin : 'anonymous',
+params : {
+'LAYERS' : "sk_pilot_ess_rasters:6_sluzieb_norm_final",
+'TILED' : true,
+'FORMAT' : format,
+'VERSION' : '1.1.1'
+}
+}),
+visible : true,
+		opacity : 0.75
+});
 
-ess6.getSource().on('tileloadstart', function (event) {
+/*
+	ess6.getSource().on('tileloadstart', function (event) {
 	$(document).ready(function () {
 		$("#loaderGif").css("display", "block");
 	})
@@ -460,17 +456,96 @@ ess6.getSource().on('tileloadend', function (event) {
 		$("#loaderGif").css("display", "none");
 	})
 });
-
-var olu = new ol.layer.Tile({
-		source : new ol.source.XYZ({
-			crossOrigin : null,
-			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/sk_land_use:land_use_existing@EPSG:3857@png/{z}/{x}/{-y}.png'
-		}),
-		visible : false,
+*/
+//olu_sk,olu_si,olu_hu,olu_rs,olu_au
+	
+var olu_sk = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "olu:lu_elu_object_sk",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
 		opacity : 0.75
-	});
+});
 
-olu.getSource().on('tileloadstart', function (event) {
+
+var olu_si = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "olu:lu_elu_object_si",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
+
+var olu_hu = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "olu:lu_elu_object_hu",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
+
+var olu_rs = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "olu:lu_elu_object_rs",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
+
+var olu_au = new ol.layer.Tile({
+	source : new ol.source.TileWMS({
+	preload : Infinity,
+	url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+	serverType : 'geoserver',
+	crossOrigin : 'anonymous',
+	params : {
+	'LAYERS' : "olu:lu_elu_object_au",
+	'TILED' : true,
+	'FORMAT' : format,
+	'VERSION' : '1.1.1'
+	}
+	}),
+visible : false,
+		opacity : 0.75
+});
+/*
+	olu.getSource().on('tileloadstart', function (event) {
 	$(document).ready(function () {
 		$("#loaderGif").css("display", "block");
 	})
@@ -480,6 +555,7 @@ olu.getSource().on('tileloadend', function (event) {
 		$("#loaderGif").css("display", "none");
 	})
 });
+*/
 
 var skolu_source = new ol.source.Vector({
 		format : new ol.format.GeoJSON(),
@@ -487,8 +563,8 @@ var skolu_source = new ol.source.Vector({
 			$(document).ready(function () {
 				$("#loaderGif").css("display", "block");
 			});
-			return 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=WFS&' +
-			'version=1.1.0&request=GetFeature&typename=sk_land_use:land_use_existing&' +
+			return 'http://data.datacove.eu:8080/geoserver/ows?service=WFS&' +
+			'version=1.1.0&request=GetFeature&typename=lu:lu_elu_object_sk&' +
 			'outputFormat=application/json&srsname=EPSG:3857&' +
 			'bbox=' + extent.join(',') + ',EPSG:3857';
 		},
@@ -522,17 +598,6 @@ var defaultEuropa = new ol.style.Style({
 		})
 	});
 
-/*
-var vectorEuropa = new ol.layer.Vector({
-id : 'slovakia',
-source : new ol.source.GeoJSON({
-projection : 'EPSG:3857',
-url : '../data/nutsv9_lea_sk.geojson'
-}),
-style : defaultEuropa
-});
- */
-
 var skkraje_source = new ol.source.Vector({
 		format : new ol.format.GeoJSON(),
 		url : function (extent) {
@@ -540,7 +605,7 @@ var skkraje_source = new ol.source.Vector({
 				$("#loaderGif").css("display", "block");
 			});
 			return 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=WFS&' +
-			'version=1.1.0&request=GetFeature&typename=sk_zbgis:hranice_kraje_1_3857&' +
+			'version=1.1.0&request=GetFeature&typename=zbgis:hranice_kraje_1_3857&' +
 			'outputFormat=application/json&srsname=EPSG:3857&' +
 			'bbox=' + extent.join(',') + ',EPSG:3857';
 		},
@@ -574,7 +639,7 @@ var skokresy_source = new ol.source.Vector({
 				$("#loaderGif").css("display", "block");
 			});
 			return 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=WFS&' +
-			'version=1.1.0&request=GetFeature&typename=sk_zbgis:hranice_okresy_1_3857&' +
+			'version=1.1.0&request=GetFeature&typename=zbgis:hranice_okresy_1_3857&' +
 			'outputFormat=application/json&srsname=EPSG:3857&' +
 			'bbox=' + extent.join(',') + ',EPSG:3857';
 		},
@@ -608,7 +673,7 @@ var skobce_source = new ol.source.Vector({
 				$("#loaderGif").css("display", "block");
 			});
 			return 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/ows?service=WFS&' +
-			'version=1.1.0&request=GetFeature&typename=sk_zbgis:hranice_obce_1_3857&' +
+			'version=1.1.0&request=GetFeature&typename=zbgis:hranice_obce_1_3857&' +
 			'outputFormat=application/json&srsname=EPSG:3857&' +
 			'bbox=' + extent.join(',') + ',EPSG:3857';
 		},
@@ -886,7 +951,6 @@ function loadFeatures(objects) {
 	}
 	return features;
 }
-
 //SPOI PROF AND PUBLIC
 var spoiSparqlSourceProfPub = new ol.source.Vector({
 		format : new ol.format.GeoJSON(),
@@ -894,7 +958,7 @@ var spoiSparqlSourceProfPub = new ol.source.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[4] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[4] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -946,7 +1010,7 @@ var spoiSparqlLyr1 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[8] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[8] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -997,7 +1061,7 @@ var spoiSparqlLyr2 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[7] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[7] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1052,7 +1116,7 @@ var spoiSparqlLyr3 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[3] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[3] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1107,7 +1171,7 @@ var spoiSparqlLyr4 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[0] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[0] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1162,7 +1226,7 @@ var spoiSparqlLyr5 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[1] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[1] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1217,7 +1281,7 @@ var spoiSparqlLyr6 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[2] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[2] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1272,7 +1336,7 @@ var spoiSparqlLyr7 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[5] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[5] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1327,7 +1391,7 @@ var spoiSparqlLyr8 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[6] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[6] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1382,7 +1446,7 @@ var spoiSparqlLyr9 = new ol.layer.Vector({
 			$("#loaderGif").css("display", "block");
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:3857", "EPSG:4326"));
 			$.ajax({
-				url : 'http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT%20%3Fo%20%3Fp%20%3Fs%20FROM%20%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E%20WHERE%20%7B%20%3Fo%20%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23categoryWaze%3E%20%3C' + categoryWaze[9] + '%3E.%20%3Fo%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fgeom.%20FILTER(isBlank(%3Fgeom)%20%3D%20false).%20FILTER(bif:st_intersects(bif:st_geomfromtext(%22BOX(' + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ')%22),%20?geom)).%09%3Fo%20%3Fp%20%3Fs%20%7D%20ORDER%20BY%20%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on',
+				url :"http://data.plan4all.eu/sparql?default-graph-uri=&query=SELECT+%3Fo+%3Fp+%3Fs+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_changes.rdf%3E+FROM+%3Chttp%3A%2F%2Fwww.sdi4apps.eu%2Fpoi_categories.rdf%3E+WHERE+%7B+%3Fo+%3Chttp%3A%2F%2Fwww.openvoc.eu%2Fpoi%23class%3E+%3Fsub.+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23subClassOf%3E+%3C"+ categoryWaze[9] +"%3E.+%3Fo+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E+%3Fgeom.+FILTER%28isBlank%28%3Fgeom%29+%3D+false%29.+FILTER%28bif%3Ast_intersects%28bif%3Ast_geomfromtext%28%22BOX(" + extent[0] + '%20' + extent[1] + ',%20' + extent[2] + '%20' + extent[3] + ")%22%29%2C+%3Fgeom%29%29.%09%3Fo+%3Fp+%3Fs+%7D+ORDER+BY+%3Fo&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",
 				context : this,
 				data : {
 					format : 'json',
@@ -1429,9 +1493,41 @@ var spoiSparqlLyr10 = new ol.layer.Vector({
 		}),
 		visible : false,
 	})
-	
 
-	var infoLayersEss = [ess11, ess12, ess21, ess22, ess31, ess32, ess41, ess42, ess51, ess52, ess6];
+
+// EUNIS ES DATA
+
+/*
+var eunes1 = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+		crossOrigin:null,
+		url:'http://skpilot-viewer.virt.ics.muni.cz/geoserver/gwc/service/tms/1.0.0/geonode:chko_cerova_vrchovina@EPSG:900913@png/{z}/{x}/{-y}.png'
+		}),
+		visible : false,
+		opacity : 0.75
+		});
+
+
+	var eunes1 = new ol.layer.Tile({
+		source : new ol.source.TileWMS({
+			preload : Infinity,
+			opacity : 0.5,
+			visible : false,
+			url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms?',
+			serverType : 'geoserver',
+			crossOrigin : 'anonymous',
+			params : {
+				'LAYERS' : "geonode:chko_cerova_vrchovina",
+				'TILED' : true,
+				'FORMAT' : format,
+				'VERSION' : '1.1.1'
+			}
+		})
+	});
+
+*/	
+
+var infoLayersEss = [ess11, ess12, ess21, ess22, ess31, ess32, ess41, ess42, ess51, ess52, ess6];
 var map = new ol.Map({
 		layers : [
 			// BASE LAYERS
@@ -1473,7 +1569,7 @@ var map = new ol.Map({
 
 			// 7. Vyuzitie uzemia
 			new ol.layer.Group({
-				layers : [olu,skolu_layer]
+				layers : [olu_sk,olu_si,olu_hu,olu_rs,olu_au]
 			}),
 			// 8. Open Transport Net
 			new ol.layer.Group({
@@ -1492,7 +1588,7 @@ var map = new ol.Map({
 		view : new ol.View({
 			//projection : 'EPSG:3857',
 			center : ol.proj.transform([19.156944, 48.738611], 'EPSG:4326', 'EPSG:3857'),
-			zoom : 7
+			zoom : 6
 		})
 	});
 
@@ -1669,38 +1765,6 @@ selected_features.on('add', function (evt) {
 })
 
 var dirty = {};
-/*
-selected_features.on('add', function (evt) {
-var feature = evt.element;
-var fid = feature.getId();
-feature.on('change', function (evt) {
-dirty[evt.target.getId()] = true;
-});
-});
-
-selected_features.on('remove', function (evt) {
-var feature = evt.element;
-var fid = feature.getId();
-if (dirty[fid]) {
-console.log('changed');
-}
-});
- */
-
-// CHANGING THE FUNCTION BIND INPUTS TO WORK WITH OL > 3.4
-/*
-function bindInputs(layerid, layer) {
-new ol.dom.Input($(layerid + ' .visible')[0])
-.bindTo('checked', layer, 'visible');
-//$.each(['opacity', 'hue', 'saturation', 'contrast', 'brightness'],
-$.each(['opacity'],
-function (i, v) {
-new ol.dom.Input($(layerid + ' .' + v)[0])
-.bindTo('value', layer, v)
-.transform(parseFloat, String);
-});
-}
- */
 
 function bindInputs(layerid, layer) {
 	var visibilityInput = $(layerid + ' .visible');
@@ -1752,7 +1816,7 @@ $('#layertree li fieldset > span').click(function () {
 var wmsSource = new ol.source.TileWMS({
 		url : 'http://skpilot-viewer.virt.ics.muni.cz/geoserver/wms',
 		params : {
-			'LAYERS' : 'sk_pilot_ess_rasters:1_lesy_biomasa,sk_pilot_ess_rasters:1_lesy_biomasa_norm,sk_pilot_ess_rasters:2_dobytok_float,sk_pilot_ess_rasters:2_dobytok_norm,sk_pilot_ess_rasters:3_uhlik,sk_pilot_ess_rasters:3_uhlik_norm,sk_pilot_ess_rasters:4_CR,sk_pilot_ess_rasters:4_CR_norm,sk_pilot_ess_rasters:5_biodiv,sk_pilot_ess_rasters:5_biodiv_norm,sk_pilot_ess_rasters:6_sluzieb_norm_final,sk_land_use:land_use_existing'
+			'LAYERS' : 'sk_pilot_ess_rasters:1_lesy_biomasa,sk_pilot_ess_rasters:1_lesy_biomasa_norm,sk_pilot_ess_rasters:2_dobytok_float,sk_pilot_ess_rasters:2_dobytok_norm,sk_pilot_ess_rasters:3_uhlik,sk_pilot_ess_rasters:3_uhlik_norm,sk_pilot_ess_rasters:4_CR,sk_pilot_ess_rasters:4_CR_norm,sk_pilot_ess_rasters:5_biodiv,sk_pilot_ess_rasters:5_biodiv_norm,sk_pilot_ess_rasters:6_sluzieb_norm_final,olu:lu_elu_object_sk'
 		},
 		serverType : 'geoserver',
 		crossOrigin : null
